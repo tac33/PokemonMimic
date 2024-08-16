@@ -160,15 +160,21 @@ public class Main {
 					if (empty) {
 						System.out.println("None");
 					}
+					System.out.println();
 				} else if(choice == 2) {
-					System.out.println("Choose to pokemon to breed using pokebox #. Press '0' to exit.");
+					System.out.println("Choose two pokemon to breed using pokebox #. Press '0' to exit.");
 					Pokemon poke1 = chooseBreedPoke(user);
 					Pokemon poke2 = chooseBreedPoke(user);
 					Pokemon baby = Breed.breedPokemon(poke1, poke2);
-					user.setInPokebox(2, baby);
+					if (baby.getSpecies() != Species.EMPTY) {
+						poke1.setIsBreeding(true);
+						poke2.setIsBreeding(true);
+						user.addToPokebox(baby);
+					}
 					
 				} else if (choice == 3) {
 					System.out.println("Going back");
+					isValid = true;
 				}
 				
 				

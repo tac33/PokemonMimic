@@ -27,6 +27,8 @@ public class Breed {
 			
 			return baby;
 		}
+		
+		System.out.println("Pokemon cannot be bred.");
 		Pokemon empty = new Pokemon();
 		empty.setSpecies(Species.EMPTY);
 		return empty;

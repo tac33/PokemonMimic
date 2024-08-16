@@ -13,7 +13,7 @@ public class Charmander extends Pokemon {
 		 * @param eggPrimary
 		 * @param eggSecondary
 		 * @param level
-		 * @param gender
+		 * @param femaleChance
 		 */
 		super(Species.CHARMANDER, PokemonType.FIRE, PokemonType.NONE, 0, EggGroup.FIELD, EggGroup.DRAGON, 1, 12.5);
 	}

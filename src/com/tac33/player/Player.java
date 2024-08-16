@@ -19,6 +19,23 @@ public class Player {
 	}
 	
 	/*
+	 * Adds pokemon in the next empty slot
+	 */
+	public boolean addToPokebox(Pokemon poke) {
+		
+		for(int i=0; i < pokebox.length; i++) {
+			if (pokebox[i].getSpecies() == Species.EMPTY) {
+				pokebox[i] = poke;
+				System.out.println("Pokemon added to pokebox");
+				return true;
+			}
+		}
+		
+		System.out.println("Pokebox is full.");
+		return false;
+	}
+	
+	/*
 	 * Set pokemon in specific pokebox index
 	 */
 	public void setInPokebox(int i, Pokemon p) {
@@ -29,13 +46,20 @@ public class Player {
 	/*
 	 * Swap pokemon positions in pokebox
 	 */
-	public void replacePokemonInPokebox(int i, int x) {
+	public void swapPokemonInPokebox(int i, int x) {
 		Pokemon temp;
 		
 		temp = pokebox[i];
 		pokebox[i] = pokebox[x];
 		pokebox[x] = temp;
 		
+	}
+	
+	public void removeFromPokebox(int x) {
+		Pokemon empty = new Pokemon();
+		empty.setSpecies(Species.EMPTY);
+		
+		pokebox[x - 1] = empty;
 	}
 	
 	public Pokemon[] getPokebox() {
