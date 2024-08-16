@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 import com.tac33.player.Player;
 import com.tac33.pokemon.breeding.Breed;
+import com.tac33.pokemon.enums.Species;
 import com.tac33.pokemon.species.generic.*;
 import com.tac33.pokemon.species.*;
 
@@ -29,6 +30,16 @@ public class Main {
 		 * --- Back
 		 * - Quit
 		 * - Load
+		 * 
+		 * 
+		 * 
+		 * while(!isValid) {
+			try {
+				
+			} catch(Exception e) {
+				
+			}
+		}
 		 */
 	}
 	
@@ -39,13 +50,14 @@ public class Main {
 	 *  Quit - Quit this menu
 	 */
 	public static void mainMenu() {
-		boolean menuCheck = false;
+		boolean isValid = false;
 		
-		while(!menuCheck) {
+		while(!isValid) {
 			System.out.println("Welcome to Pokemon Breeding Mimic!");
 			System.out.println("1. Start Game \n2. Load \n3. Quit");
+			Scanner input = new Scanner(System.in);
+			
 			try {
-				Scanner input = new Scanner(System.in);
 				int choice = input.nextInt();
 				if (choice == 1) {
 					System.out.println("Game started");
@@ -53,16 +65,16 @@ public class Main {
 					gameMenu(user);
 				} else if (choice == 2) {
 					System.out.println("Loading game...");
-					menuCheck = true;
+					isValid = true;
 				} else if (choice == 3) {
 					System.out.println("Game aborted");
-					menuCheck = true;
+					isValid = true;
 				} 
 				else {
 					System.out.println("Invalid input. Use integers 1-3.");
 				}
 				
-				if (menuCheck == true) {
+				if (isValid == true) {
 					System.out.println("Closed Main Menu.");
 					input.close();				
 				}
@@ -82,25 +94,27 @@ public class Main {
 	 * - Quit - quit to main menu
 	 */
 	public static void gameMenu(Player user) {
-		boolean menuCheck = false;
+		boolean isValid = false;
 		
-		while(!menuCheck) {
-			System.out.println("1. Your Pokemon \n2. Iventory \n3. Item Shop \n4. Pokemon Shop \n5. Quit");
+		while(!isValid) {
+			System.out.println("1. Your Pokemon \n2. Breed \n3. Iventory \n4. Item Shop \n5. Pokemon Shop \n6. Quit");
 			try {
 				Scanner input = new Scanner(System.in);
 				int choice = input.nextInt();
 				
 				if (choice == 1) {
 					pokemonState(user);
-				} else if (choice == 2) {
-					inventoryState(user);
+				} else if(choice == 2) {
+					breedState(user);
 				} else if (choice == 3) {
-					itemShopState(user);
+					inventoryState(user);
 				} else if (choice == 4) {
-					pokemonShopState(user);
+					itemShopState(user);
 				} else if (choice == 5) {
+					pokemonShopState(user);
+				} else if (choice == 6) {
 					System.out.println("Quitting");
-					menuCheck = true;
+					isValid = true;
 				}
 				else {
 					System.out.println("Invalid input. Use integers 1-5.");
@@ -113,6 +127,85 @@ public class Main {
 		}
 	}
 	
+	public static void breedState(Player user) {
+		boolean isValid = false;
+		int count = 0;
+		
+		Pokemon[] pokebox = user.getPokebox();
+		
+		while(!isValid) {
+			System.out.println("1. Currently Breeding \n2. Breed Pokemon \n3. Quit");
+			try {
+				Scanner input = new Scanner(System.in);
+				int choice = input.nextInt();
+				
+				/*
+				 * 1. Show Pokemon Currently breeding
+				 * 2. Choose Pokemon to breed.
+				 * 3. Quit
+				 * - Choose Poke1
+				 * - Choose poke2
+				 * -- Compatible? T- Breed F-Cannot breed
+				 * - Back to Breed menu.
+				 */
+				if (choice == 1) {
+					boolean empty = true;
+					System.out.println("Currently Breeding: ");
+					for(int i=0; i < pokebox.length; i++) {
+						if (pokebox[i].getSpecies() != Species.EMPTY && pokebox[i].getIsBreeding()) {
+							System.out.println((i + 1) + ". " + pokebox[i].getSpecies());
+							empty = false;
+						}
+					}
+					if (empty) {
+						System.out.println("None");
+					}
+				} else if(choice == 2) {
+					System.out.println("Choose to pokemon to breed using pokebox #. Press '0' to exit.");
+					Pokemon poke1 = chooseBreedPoke(user);
+					Pokemon poke2 = chooseBreedPoke(user);
+					Pokemon baby = Breed.breedPokemon(poke1, poke2);
+					user.setInPokebox(2, baby);
+					
+				} else if (choice == 3) {
+					System.out.println("Going back");
+				}
+				
+				
+			} catch(Exception e) {
+				
+			}
+		}
+		
+		
+	}
+	
+	
+	public static Pokemon chooseBreedPoke(Player user) {
+		boolean isValid = false;
+		Pokemon[] pokebox = user.getPokebox();
+		
+		while(!isValid) {
+			try {
+				Scanner input = new Scanner(System.in);
+				int choice = input.nextInt();
+				
+				if (choice > 0 && choice < 31) {
+					isValid = true;
+					return pokebox[choice - 1];
+				} else {
+					System.out.println("Please enter a number 1-30.");
+				}
+				
+				
+			} catch(Exception e) {
+				System.out.println("Invalid input, please use an integer");
+			}
+		}
+		
+		return null;
+	}
+
 	/*
 	 * Choose starter pokemon for the beginning of the game.
 	 */
@@ -177,18 +270,34 @@ public class Main {
 	
 	public static void pokemonState(Player user) {
 		boolean isValid = false;
+		Scanner input = new Scanner(System.in);
 		
-		System.out.println("get Pokemon Menu");
 		Pokemon[] pokebox = user.getPokebox();
 		
 		for(int i=0; i < pokebox.length; i++) {
-			System.out.println(i + " " + pokebox[i].getSpecies());
+			System.out.println((i + 1) + ". " + pokebox[i].getSpecies());
 		}
-		
-		
 		
 		while(!isValid) {
 			
+			try {
+				System.out.println("\nEnter Pokemon Box #");
+				System.out.println("Type '0' to exit.");
+				int choice = input.nextInt();
+				
+				if (choice == 0) {
+					isValid = true;
+				} else if (choice > 0 && choice < 31) {
+					System.out.println(pokebox[choice - 1].toString());
+					System.out.println("\nIVs");
+					pokebox[choice-1].printIvs();
+				} else {
+					System.out.println("Please enter a number 1-30.");
+				}
+				
+			} catch (Exception e) {
+				System.out.println("Must be a number 1-30");
+			}
 			
 		}
 	}

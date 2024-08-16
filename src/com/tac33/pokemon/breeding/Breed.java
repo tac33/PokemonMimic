@@ -23,12 +23,13 @@ public class Breed {
 			baby.setSpecialAttackIV(baby.getRandomIV());
 			baby.setSpecialDefenseIV(baby.getRandomIV());
 			baby.setSpeedIV(31);
-			baby.setEgg(true);
+			baby.setIsEgg(true);
 			
 			return baby;
 		}
-		
-		return null;
+		Pokemon empty = new Pokemon();
+		empty.setSpecies(Species.EMPTY);
+		return empty;
 	}
 	
 	/*
@@ -79,7 +80,7 @@ public class Breed {
 	public static boolean checkIsEgg(Pokemon poke1, Pokemon poke2) {
 		boolean isEgg = false;
 		
-		if (!poke1.isEgg() || !poke2.isEgg()) {
+		if (!poke1.getIsEgg() || !poke2.getIsEgg()) {
 			isEgg = true;
 		}
 		

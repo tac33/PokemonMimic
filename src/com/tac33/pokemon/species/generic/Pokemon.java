@@ -18,6 +18,7 @@ public class Pokemon extends PokemonIVs {
 	private Gender gender;
 	private double femaleChance;
 	private boolean isEgg = false;
+	private boolean isBreeding = false;
 	
 	
 	public Pokemon() {
@@ -553,19 +554,45 @@ public class Pokemon extends PokemonIVs {
 	/**
 	 * @return the isEgg
 	 */
-	public boolean isEgg() {
+	public boolean getIsEgg() {
 		return isEgg;
 	}
 
 	/**
 	 * @param isEgg the isEgg to set
 	 */
-	public void setEgg(boolean isEgg) {
+	public void setIsEgg(boolean isEgg) {
 		this.isEgg = isEgg;
+	}
+	
+	/**
+	 * @return the isBreeding
+	 */
+	public boolean getIsBreeding() {
+		return isBreeding;
+	}
+
+	/**
+	 * @param isBreeding the isBreeding to set
+	 */
+	public void setIsBreeding(boolean isBreeding) {
+		this.isBreeding = isBreeding;
+	}
+	
+	/*
+	 * Print out the IVs of current pokemon.
+	 */
+	public void printIvs() {
+		System.out.println("Hp: " + this.getHpIV());
+		System.out.println("Attack: " + this.getAttackIV());
+		System.out.println("Defense: " + this.getDefenseIV());
+		System.out.println("Sp. Attack: " + this.getSpecialAttackIV());
+		System.out.println("Sp. Defense: " + this.getSpecialDefenseIV());
+		System.out.println("Speed: " + this.getSpeedIV());
 	}
 
 	public String toString() {
-		String output = String.format("Pokemon: %s \nPrimary Type: %s \nSecondary Type: %s \nLevel: %s \nEgg Primary: %s \nEgg Secdondary: %s \nNatDex: %s \nGender: %s ", species, typePrimary, typeSecondary, level, eggPrimary, eggSecondary, natDexNumber, gender);
+		String output = String.format("Pokemon: %s \nPrimary Type: %s \nSecondary Type: %s \nLevel: %s \nEgg Primary: %s \nEgg Secdondary: %s \nNatDex: %s \nGender: %s \nBreeding: %s ", species, typePrimary, typeSecondary, level, eggPrimary, eggSecondary, natDexNumber, gender, isBreeding);
 		return output;
 	}
 	

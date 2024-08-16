@@ -1,6 +1,7 @@
 package com.tac33.player;
 
 import com.tac33.item.Item;
+import com.tac33.pokemon.enums.Species;
 import com.tac33.pokemon.species.generic.Pokemon;
 
 public class Player {
@@ -8,19 +9,12 @@ public class Player {
 	private int money;
 	private Item[] inventory = new Item[50];
 	
-	/*
-	 * Add new pokemon to pokebox
-	 */
-	public void addToPokebox(Pokemon p) {
-		
+	public Player() {
 		for(int i=0; i < pokebox.length; i++) {
+			Pokemon poke = new Pokemon();
+			poke.setSpecies(Species.EMPTY);
 			
-			if (pokebox[i] == null) {
-				pokebox[i] = p;
-				System.out.println("Added to box");
-			} else {
-				System.out.println("pokebox is full");
-			}
+			pokebox[i] = poke;
 		}
 	}
 	

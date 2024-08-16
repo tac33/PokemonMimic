@@ -4,5 +4,5 @@ public enum Species {
 	CHARMANDER,
 	BULBASAUR,
 	SQUIRTLE,
-	UNDEFINED
+	EMPTY
 }
