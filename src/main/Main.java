@@ -1,6 +1,11 @@
 package main;
+import java.util.HashMap;
 import java.util.Scanner;
 
+import com.tac33.items.Item;
+import com.tac33.items.Item.*;
+import com.tac33.items.enums.ItemType;
+import com.tac33.items.enums.Items;
 import com.tac33.player.Player;
 import com.tac33.pokemon.breeding.Breed;
 import com.tac33.pokemon.enums.Species;
@@ -309,13 +314,39 @@ public class Main {
 	}
 	
 	public static void inventoryState(Player user) {
+		boolean isValid = false;
+		HashMap<Item, Integer> inventory = user.getInventory();
+		Item ever = new Item(Items.EVERSTONE, ItemType.POKEMON, "Passes on the Holders nature to the child.");
+		user.addToInventory(ever, 2);
+		
+		while(!isValid) {
+			try {
+				System.out.println("Iventory menu");
+				
+				//  NOTE: If it's a pokemon add to heldItem spot, otherwise use it on player?
+				System.out.println("1. Use item \n2. Remove item");
+				
+				for (Item item : inventory.keySet()) {
+					System.out.println(item.getName() + ": " + inventory.get(item));
+					System.out.println(item.getDescription(Items.EVERSTONE));
+				}
+				isValid = true;
+				
+				
+			} catch(Exception e) {
+				
+			}
+		}
+				
 		
 	}
 	
+	// Buy Items
 	public static void itemShopState(Player user) {
 		
 	}
 	
+	// Buy Pokemon
 	public static void pokemonShopState(Player user) {
 		
 	}

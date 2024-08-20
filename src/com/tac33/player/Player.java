@@ -1,13 +1,15 @@
 package com.tac33.player;
 
-import com.tac33.item.Item;
+import java.util.HashMap;
+
+import com.tac33.items.*;
 import com.tac33.pokemon.enums.Species;
 import com.tac33.pokemon.species.generic.Pokemon;
 
 public class Player {
 	private Pokemon[] pokebox = new Pokemon[30];
+	private HashMap<Item, Integer> inventory = new HashMap<Item, Integer>();
 	private int money;
-	private Item[] inventory = new Item[50];
 	
 	public Player() {
 		for(int i=0; i < pokebox.length; i++) {
@@ -30,7 +32,6 @@ public class Player {
 				return true;
 			}
 		}
-		
 		System.out.println("Pokebox is full.");
 		return false;
 	}
@@ -67,4 +68,50 @@ public class Player {
 		return pokebox;
 	}
 	
+	public void setInventoryItem(Item item, int quantity) {
+		inventory.put(item, quantity);
+	}
+	
+	public HashMap<Item, Integer> getInventory() {
+		return inventory;
+	}
+	
+	/*
+	 * Add to inventory
+	 */
+	public void addToInventory(Item item, int quantity) {
+		
+		if (quantity <= 0) {
+			System.out.println("Cannot have 0 quantity.");
+			return;
+		}
+		
+		// Add to quantity if the item already exist, else just add item
+		if (inventory.containsKey(item)) {
+			int prev = inventory.get(item);
+			quantity = quantity + prev;
+			inventory.put(item, quantity);
+		} else {
+			inventory.put(item, quantity);	
+		}
+	}
+	
+	/*
+	 * Remove from Inventory
+	 */
+	public void removeFromInventory(Item item) {
+		int subtract = inventory.get(item) - 1;
+		inventory.put(item, subtract);
+		if (inventory.get(item) <= 0) {
+			inventory.remove(item);
+		}
+	}
+	
+	public void setMoney(int money) {
+		this.money = money;
+	}
+	
+	public int getMoney() {
+		return money;
+	}
 }

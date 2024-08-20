@@ -1,7 +1,6 @@
 package com.tac33.pokemon.species.generic;
 
 import java.util.Random;
-
 import com.tac33.pokemon.enums.*;
 
 public class Pokemon extends PokemonIVs {
@@ -14,8 +13,9 @@ public class Pokemon extends PokemonIVs {
 	private EggGroup eggPrimary;
 	private EggGroup eggSecondary;
 	private Species species;
-	private int natDexNumber;
 	private Gender gender;
+	private Natures nature;
+	private int natDexNumber;
 	private double femaleChance;
 	private boolean isEgg = false;
 	private boolean isBreeding = false;
@@ -53,22 +53,107 @@ public class Pokemon extends PokemonIVs {
 		} else {
 			this.level = level;
 		}
-		/*
-		 * Set Gender
-		 */
+		
+		// set Gender
 		genderSelection(this.femaleChance);
 		
-		/*
-		 * Set pokemon IVs
-		 */
+		// set IVs
 		this.setHpIV(getRandomIV());
 		this.setAttackIV(getRandomIV());
 		this.setDefenseIV(getRandomIV());
 		this.setSpecialAttackIV(getRandomIV());
 		this.setSpecialDefenseIV(getRandomIV());
 		this.setSpeedIV(getRandomIV());
+		
+		// set nature
+		randomNature();
+		
 	}
-	
+	/*
+	 * Picks random nature.
+	 */
+	private void randomNature() {
+		Random rand = new Random();
+		int n = rand.nextInt(25);
+		
+		switch (n) {
+		case 0:
+			setNature(Natures.ADAMANT);
+			break;
+		case 1:
+			setNature(Natures.BASHFUL);
+			break;
+		case 2:
+			setNature(Natures.BOLD);
+			break;
+		case 3:
+			setNature(Natures.BRAVE);
+			break;
+		case 4:
+			setNature(Natures.CALM);
+			break;
+		case 5:
+			setNature(Natures.CAREFUL);
+			break;
+		case 6:
+			setNature(Natures.DOCILE);
+			break;
+		case 7:
+			setNature(Natures.GENTLE);
+			break;
+		case 8:
+			setNature(Natures.HARDY);
+			break;
+		case 9:
+			setNature(Natures.IMPISH);
+			break;
+		case 10:
+			setNature(Natures.JOLLY);
+			break;
+		case 11:
+			setNature(Natures.LAX);
+			break;
+		case 12:
+			setNature(Natures.LONELY);
+			break;
+		case 13:
+			setNature(Natures.MILD);
+			break;
+		case 14:
+			setNature(Natures.MODEST);
+			break;
+		case 15:
+			setNature(Natures.NAIVE);
+			break;
+		case 16:
+			setNature(Natures.NAUGHTY);
+			break;
+		case 17:
+			setNature(Natures.QUIRKY);
+			break;
+		case 18:
+			setNature(Natures.RASH);
+			break;
+		case 19:
+			setNature(Natures.RELAXED);
+			break;
+		case 20:
+			setNature(Natures.SASSY);
+			break;
+		case 21:
+			setNature(Natures.SERIOUS);
+			break;
+		case 22:
+			setNature(Natures.TIMID);
+			break;
+		default:
+			setNature(Natures.DOCILE);
+			break;
+			
+		}
+		
+	}
+
 	public Pokemon(Pokemon poke) {
 		this.species = poke.species;
 		this.typePrimary = poke.typePrimary;
@@ -147,6 +232,20 @@ public class Pokemon extends PokemonIVs {
 		this.level = level;
 	}
 	
+	/**
+	 * @return the nature
+	 */
+	public Natures getNature() {
+		return nature;
+	}
+
+	/**
+	 * @param nature the nature to set
+	 */
+	public void setNature(Natures nature) {
+		this.nature = nature;
+	}
+
 	/**
 	 * @return the type1
 	 */
@@ -592,7 +691,7 @@ public class Pokemon extends PokemonIVs {
 	}
 
 	public String toString() {
-		String output = String.format("Pokemon: %s \nPrimary Type: %s \nSecondary Type: %s \nLevel: %s \nEgg Primary: %s \nEgg Secdondary: %s \nNatDex: %s \nGender: %s \nBreeding: %s ", species, typePrimary, typeSecondary, level, eggPrimary, eggSecondary, natDexNumber, gender, isBreeding);
+		String output = String.format("Pokemon: %s \nPrimary Type: %s \nSecondary Type: %s \nNature: %s \nLevel: %s \nEgg Primary: %s \nEgg Secdondary: %s \nNatDex: %s \nGender: %s \nBreeding: %s ", species, typePrimary, typeSecondary, nature, level, eggPrimary, eggSecondary, natDexNumber, gender, isBreeding);
 		return output;
 	}
 	
