@@ -2,10 +2,8 @@ package main;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import com.tac33.items.Item;
-import com.tac33.items.Item.*;
-import com.tac33.items.enums.ItemType;
-import com.tac33.items.enums.Items;
+import com.tac33.items.*;
+import com.tac33.items.enums.*;
 import com.tac33.player.Player;
 import com.tac33.pokemon.breeding.Breed;
 import com.tac33.pokemon.enums.Species;
@@ -13,40 +11,6 @@ import com.tac33.pokemon.species.generic.*;
 import com.tac33.pokemon.species.*;
 
 public class Main {
-
-	public static void main(String[] args) {
-		
-		mainMenu();
-		
-		/*
-		 * Main Menu:
-		 * - Start
-		 * -- Pokemon
-		 * --- Give Item
-		 * --- Breed
-		 * --- Check Stats
-		 * --- Show Current Pokemon
-		 * --- Back
-		 * 
-		 * -- ItemShop
-		 * --- Buy Items
-		 * --- Sell Items
-		 * --- Sell Pokemon
-		 * --- Back
-		 * - Quit
-		 * - Load
-		 * 
-		 * 
-		 * 
-		 * while(!isValid) {
-			try {
-				
-			} catch(Exception e) {
-				
-			}
-		}
-		 */
-	}
 	
 	/*
 	 * Main menu GameState
